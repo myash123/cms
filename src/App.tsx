@@ -1,19 +1,17 @@
 import React, { createContext, useReducer } from 'react';
 import AuthContainer from './components/AuthContainer';
 
-// Define a type for the context
 type AuthContextType = {
-  user: string | null; // You might want to specify a more detailed type here.
+  user: string | null;
   hasLoginError: boolean;
   login: (username: string, password: string) => void;
   logout: () => void;
 };
 
-// Create the context with the initial value matching the type
 export const AuthContext = createContext<AuthContextType>({
   user: null,
   hasLoginError: false,
-  login: () => {}, // Dummy function, actual implementation will replace it.
+  login: () => {},
   logout: () => {}
 });
 
@@ -25,7 +23,7 @@ const reducer = (state: any, action: any) => {
         return {
           ...state,
           hasLoginError: false,
-          user: username, // Populate with user data as needed
+          user: username, 
         };
       }
       return {
