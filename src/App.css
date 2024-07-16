@@ -1,0 +1,23 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.sign-up-container {
+  display: flex;
+  flex-direction: column;
+  border: 1rem solid black;
+  color: red;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.login-signup-button {
+  margin-bottom: 1rem;
+}
