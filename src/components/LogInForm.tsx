@@ -1,13 +1,15 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../App";
 
-const LogInForm = () => {
+const LogInForm:React.FC = () => {
     const { login, hasLoginError } = useContext(AuthContext);
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [ username, setUsername ] = useState('');
+    const [ password, setPassword ] = useState('');
     const onLogin = () => {
         login(username, password);
-        console.log(username, password);
+        if(username == '' && password == '') {
+            hasLoginError == true;
+        }
     }
     return (
         <div>

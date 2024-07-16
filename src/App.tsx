@@ -1,5 +1,6 @@
-import React, { createContext, useReducer } from 'react';
+import { createContext, useReducer } from 'react';
 import AuthContainer from './components/AuthContainer';
+import CmsContainer from './components/CmsContainer';
 
 type AuthContextType = {
   user: string | null;
@@ -8,6 +9,18 @@ type AuthContextType = {
   logout: () => void;
 };
 
+type State = LoginState | LogoutState;
+
+type LoginState = {
+  user: string | null,
+  hasLoginError: boolean,
+}
+
+type LogoutState = {
+  user: string | null,
+  hasLoginError: false
+}
+
 export const AuthContext = createContext<AuthContextType>({
   user: null,
   hasLoginError: false,
@@ -15,11 +28,11 @@ export const AuthContext = createContext<AuthContextType>({
   logout: () => {}
 });
 
-const reducer = (state: any, action: any) => {
+const reducer = (state: State, action: any) => {
   switch (action.type) {
     case 'login': {
       const { username, password } = action.payload;
-      if (username != null && password != null) {
+      if (username != '' && password != '') {
         return {
           ...state,
           hasLoginError: false,
@@ -70,7 +83,7 @@ function App() {
     <>
       <AuthContext.Provider value={value}>
         {!value.user && <AuthContainer />}
-        {value.user && <div>`This is a secret div ${JSON.stringify(value.user)}`</div>}
+        {value.user && <CmsContainer />}
       </AuthContext.Provider>
     </>
   );
