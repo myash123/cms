@@ -11,7 +11,3 @@ const AuthContainer = () => {
 }
 
 export default AuthContainer;
-
-// Create auth context
-// Auth Provider around protected area
-// If user is logged in, check the 

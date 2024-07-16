@@ -1,31 +1,42 @@
-import React, { createContext, useReducer } from 'react';
+import { createContext, useReducer } from 'react';
 import AuthContainer from './components/AuthContainer';
+import CmsContainer from './components/CmsContainer';
 
-// Define a type for the context
 type AuthContextType = {
-  user: string | null; // You might want to specify a more detailed type here.
+  user: string | null;
   hasLoginError: boolean;
   login: (username: string, password: string) => void;
   logout: () => void;
 };
 
-// Create the context with the initial value matching the type
+type State = LoginState | LogoutState;
+
+type LoginState = {
+  user: string | null,
+  hasLoginError: boolean,
+}
+
+type LogoutState = {
+  user: string | null,
+  hasLoginError: false
+}
+
 export const AuthContext = createContext<AuthContextType>({
   user: null,
   hasLoginError: false,
-  login: () => {}, // Dummy function, actual implementation will replace it.
+  login: () => {},
   logout: () => {}
 });
 
-const reducer = (state: any, action: any) => {
+const reducer = (state: State, action: any) => {
   switch (action.type) {
     case 'login': {
       const { username, password } = action.payload;
-      if (username != null && password != null) {
+      if (username != '' && password != '') {
         return {
           ...state,
           hasLoginError: false,
-          user: username, // Populate with user data as needed
+          user: username, 
         };
       }
       return {
@@ -72,7 +83,7 @@ function App() {
     <>
       <AuthContext.Provider value={value}>
         {!value.user && <AuthContainer />}
-        {value.user && <div>`This is a secret div ${JSON.stringify(value.user)}`</div>}
+        {value.user && <CmsContainer />}
       </AuthContext.Provider>
     </>
   );
