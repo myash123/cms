@@ -40,6 +40,7 @@ const ContactsTable: React.FC<ContactsTableProps> = ({
     }
 
     const tableRows = contactList.map((contact, index) => {
+   
         const key = `${contact.phoneNumber}-${index}`;
         return (
             <tr key={key}>
@@ -63,6 +64,8 @@ const ContactsTable: React.FC<ContactsTableProps> = ({
 
     return (
         <>
+            {
+            contactList.length > 0 && 
             <table className='contacts-table'>
                 <thead>
                     <tr>
@@ -76,6 +79,7 @@ const ContactsTable: React.FC<ContactsTableProps> = ({
                     {tableRows}
                 </tbody>
             </table>
+}
             {editMode.isEditMode && 
             <EditContactForm
                 contact={editMode.contact}
@@ -85,7 +89,8 @@ const ContactsTable: React.FC<ContactsTableProps> = ({
                 handleChangeEmail={handleChangeEmail}
                 handleEditContact={handleEditContact}
                 closeEditMode={closeEditMode}
-            />}
+            />
+            }
         </>
     );
 }

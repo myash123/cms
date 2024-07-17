@@ -22,17 +22,18 @@ const EditContactForm:React.FC<EditContactFormProps> = ({
     contact
 }) => {
     return (
-        <div className="cms-form-container">
+        <div className="cms-form-container edit-form-container">
+            <h2>Edit Contact</h2>
             <form className="cms-form">
                 <label>Full name</label>
                 <input type="text" defaultValue={contact.fullName} onChange={handleChangeFullName} />
                 <label>Phone number (numbers only)</label>
                 <input type="text" defaultValue={contact.phoneNumber}onChange={handleChangePhoneNumber} />
-                <label>email</label>
+                <label>Email</label>
                 <input type="text" defaultValue={contact.email} onChange={handleChangeEmail} />
                 <label>Address</label>
                 <input type="text" defaultValue={contact.address} onChange={handleChangeAddress} />
-                <button onClick={() => { handleEditContact(contact); closeEditMode(); }} className="login-signup-button">Edit contact</button>
+                <button onClick={() => { handleEditContact(contact); closeEditMode(); }} className="login-signup-button">Confirm Change</button>
             </form>
         </div>
     )

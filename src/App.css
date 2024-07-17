@@ -51,12 +51,28 @@
 }
 
 .contacts-table {
+  max-width: 800px;
   width: 100%;
   border: 1px solid blueviolet;
   border-radius: 1px;;
 }
 
 .contacts-table th {
-  padding: 2px;
+  padding: 10px;
 }
 
+.contacts-table td {
+  font-size: .8rem;
+  padding: 2px;
+  border-bottom: 1px dotted gray;
+}
+
+.edit-form-container {
+    position: fixed;
+    box-shadow: 0 2px 4px blueviolet;
+    padding: 0 12px 0 12px;
+    border: 1px solid blueviolet;
+    z-index: 100;
+    top: 40%;
+    left: 80%;
+}
