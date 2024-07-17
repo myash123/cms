@@ -1,8 +1,9 @@
-import { AuthContext } from '../App';
 import '../App.css';
+import { AuthContext } from '../App';
+import { useContext } from 'react';
 import useContact from '../hooks/useContact';
 import CmsForm from './CmsForm';
-import { useContext } from 'react';
+import ContactsTable from './ContactsTable';
 
 const CmsContainer = () => {
     const context = useContext(AuthContext);
@@ -11,16 +12,11 @@ const CmsContainer = () => {
             handleChangeEmail,
             handleChangeAddress,
             handleSubmit,
+            handleRemoveContact,
+            handleEditContact,
             contactList
         } = useContact();
     
-        const mapContactsToList = contactList.map(contact => {
-            return (
-                <li>
-                    {contact.fullName} -- {contact.email} -- {contact.phoneNumber} -- {contact.address}
-                </li>
-            )
-        });
     return (
         <div className='cms-container'>
             <h1> Your Contact Management System</h1>
@@ -32,11 +28,15 @@ const CmsContainer = () => {
                 handleChangeAddress={handleChangeAddress}
                 handleSubmit={handleSubmit}
             />
-            <div>
-                <ul>
-                    {mapContactsToList}
-                </ul>
-            </div>
+            <ContactsTable 
+                contactList={contactList}
+                handleRemoveContact={handleRemoveContact}
+                handleEditContact={handleEditContact}
+                handleChangeFullName={handleChangeFullName}
+                handleChangePhoneNumber={handleChangePhoneNumber}
+                handleChangeAddress={handleChangeAddress}
+                handleChangeEmail={handleChangeEmail}
+            />
         </div>
     )
 }

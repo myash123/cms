@@ -14,8 +14,9 @@ const CmsForm:React.FC<CmsFormProps> = ({
     handleChangePhoneNumber,
     handleChangeAddress,
     handleChangeEmail,
-    handleSubmit
+    handleSubmit,
 }) => {
+
     return (
         <div className="cms-form-container">
             <form onSubmit={handleSubmit} className="cms-form">
@@ -23,7 +24,7 @@ const CmsForm:React.FC<CmsFormProps> = ({
                 <input type="text" onChange={handleChangeFullName} />
                 <label>Phone number (numbers only)</label>
                 <input type="text" onChange={handleChangePhoneNumber} />
-                <label>email</label>
+                <label>Email</label>
                 <input type="text" onChange={handleChangeEmail} />
                 <label>Address</label>
                 <input type="text" onChange={handleChangeAddress} />
