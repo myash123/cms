@@ -19,6 +19,7 @@
 }
 
 .login-signup-button {
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -48,3 +49,14 @@
   font-weight: 500;
   color:blueviolet
 }
+
+.contacts-table {
+  width: 100%;
+  border: 1px solid blueviolet;
+  border-radius: 1px;;
+}
+
+.contacts-table th {
+  padding: 2px;
+}
+
