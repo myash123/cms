@@ -12,6 +12,8 @@ const CmsContainer = () => {
             handleChangeEmail,
             handleChangeAddress,
             handleSubmit,
+            handleRemoveContact,
+            handleEditContact,
             contactList
         } = useContact();
     
@@ -26,7 +28,15 @@ const CmsContainer = () => {
                 handleChangeAddress={handleChangeAddress}
                 handleSubmit={handleSubmit}
             />
-            <ContactsTable contactList={contactList}/>
+            <ContactsTable 
+                contactList={contactList}
+                handleRemoveContact={handleRemoveContact}
+                handleEditContact={handleEditContact}
+                handleChangeFullName={handleChangeFullName}
+                handleChangePhoneNumber={handleChangePhoneNumber}
+                handleChangeAddress={handleChangeAddress}
+                handleChangeEmail={handleChangeEmail}
+            />
         </div>
     )
 }

@@ -14,8 +14,9 @@ const CmsForm:React.FC<CmsFormProps> = ({
     handleChangePhoneNumber,
     handleChangeAddress,
     handleChangeEmail,
-    handleSubmit
+    handleSubmit,
 }) => {
+
     return (
         <div className="cms-form-container">
             <form onSubmit={handleSubmit} className="cms-form">

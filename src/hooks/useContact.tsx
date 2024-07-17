@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { ContactInterface } from '../types/types';
+import { v4 as uuidv4 } from 'uuid';
 
 const useContact = () => {
+    
     const [ fullName, setFullName ] = useState('');
     const [ phoneNumber, setPhoneNumber ] = useState('');
     const [ email, setEmail ] = useState('');
@@ -15,10 +17,35 @@ const useContact = () => {
 
     const handleSubmit = (e:any) => {
         e.preventDefault();
+        const id = uuidv4();
         setContactList(prevState => [...prevState ,
-            { fullName, phoneNumber, email, address }
+            { fullName, phoneNumber, email, address, id }
         ]);
     };
+
+    const handleRemoveContact = (id: string) => {
+        const updatedContactList = contactList;
+        setContactList(updatedContactList.filter( contact => contact.id != id));
+    }
+
+    const handleEditContact = (contact: ContactInterface) => {
+        const updatedContactList = contactList;
+        setContactList(
+            updatedContactList.map(
+                (item) => {
+                    if (item.id !== contact.id) {
+                        return (
+                            item
+                        )
+                    } else {
+                        return (
+                            { fullName, phoneNumber, email, address, id: contact.id }
+                        )
+                    }
+                }
+            )
+        )
+    }
 
     return { 
         handleChangeFullName, 
@@ -26,6 +53,8 @@ const useContact = () => {
         handleChangeEmail,
         handleChangeAddress,
         handleSubmit,
+        handleRemoveContact,
+        handleEditContact,
         contactList
     }
 }
