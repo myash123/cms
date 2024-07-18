@@ -1,25 +1,18 @@
-import React, { useContext, useState } from "react";
-import { AuthContext } from "../App";
+import React, { useState } from "react";
 
 const LogInForm:React.FC = () => {
-    const { login, hasLoginError } = useContext(AuthContext);
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
-    const onLogin = () => {
-        login(username, password);
-        if(username == '' && password == '') {
-            hasLoginError == true;
-        }
-    }
     return (
         <div>
+            <h2>Login, Please</h2>
             <form className="login-form">
                 <label>Username</label>
-                <input type="text" onChange={e => setUsername(e.target.value)} />
+                <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
                 <label>Password</label>
-                <input type="password" onChange={e => setPassword(e.target.value)} />
+                <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
             </form>
-            <button className="login-signup-button" onClick={onLogin}>Login</button>
+            <button className="login-signup-button" onClick={() => alert('hello')}>Login</button>
         </div>
     )
 }
