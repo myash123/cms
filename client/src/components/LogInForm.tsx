@@ -5,8 +5,11 @@ const LogInForm:React.FC = () => {
 
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
+    
+    const user = { username, password };
 
     return (
+
         <div>
             <h2>Login, Please</h2>
             <form className="login-form">
@@ -15,8 +18,8 @@ const LogInForm:React.FC = () => {
                 <label>Password</label>
                 <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
             </form>
-            <button className="login-signup-button" onClick={() => authService().verifyUser()}>Login</button>
-            <button className="login-signup-button" onClick={() => authService().registerUser({username, password})}>Sign Up</button>
+            <button className="login-signup-button" onClick={() => authService().loginUser(user)}>Login</button>
+            <button className="login-signup-button" onClick={() => authService().registerUser(user)}>Sign Up</button>
         </div>
     )
 }

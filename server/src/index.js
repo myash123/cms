@@ -62,6 +62,35 @@ app.post("/register", async (req, res) => {
     res.status(200).send({ success: true, token });
 });
 
+app.post("/login-user", async (req, res) => {
+
+    const path = process.env.DB_PATH;
+
+    const { username, password } = req.body;
+    const usersList = await readUsersFromDb(path);
+    const userMatchExists = usersList.some(user => user.username === username && user.password === password);
+
+    if (userMatchExists) {
+        const payload = {
+            username,
+            iat: Math.floor(Date.now() / 1000),
+            exp: Math.floor(Date.now() / 1000) + (60 * 60)
+          };
+    
+        const jwtSecretKey = process.env.JWT_SECRET_KEY;
+        const token = jwt.sign(payload, jwtSecretKey);
+        
+        res.cookie('jwtToken', token, {
+            httpOnly: true,
+            secure: true, 
+            sameSite: 'lax' 
+        });
+        res.status(200).send({ success: true, token });
+    } else {
+        res.status(403);
+    };
+});
+
 app.get("/verify-user", (req, res) => {
     const token = req.cookies['jwtToken'];
 

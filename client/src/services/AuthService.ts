@@ -7,6 +7,7 @@ type registerUserDataType = {
 
 const registerUserEndpoint = import.meta.env.VITE_REGISTER_URL;
 const verifyUserEndpoint = import.meta.env.VITE_VERIFY_USER_URL;
+const loginUserEndpoint = import.meta.env.VITE_LOGIN_USER_URL;
 
 const authService = () => {
     const registerUser = async (userData: registerUserDataType) => {
@@ -18,11 +19,14 @@ const authService = () => {
         }
     }
 
-    // const loginUser = async () => {
-    //     try {
-
-    //     }
-    // }
+    const loginUser = async (userData: registerUserDataType) => {
+        try {
+            await axios.post(loginUserEndpoint, userData);
+            console.log('Successfully logged in user', userData.username);
+        } catch (error) {
+            console.error('Error logging user in', error);
+        }
+    }
 
     const verifyUser = async () => {
         try {
@@ -35,7 +39,7 @@ const authService = () => {
         }
     }
 
-    return { registerUser, verifyUser }
+    return { registerUser, verifyUser, loginUser }
 }
 
 export default authService;
