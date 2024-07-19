@@ -18,11 +18,11 @@ const authService = () => {
         }
     }
 
-    const loginUser = async () => {
-        try {
-            
-        }
-    }
+    // const loginUser = async () => {
+    //     try {
+
+    //     }
+    // }
 
     const verifyUser = async () => {
         try {

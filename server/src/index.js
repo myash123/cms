@@ -1,8 +1,10 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const jwt = require('jsonwebtoken');
-const cors = require('cors');
-const cookieParser = require('cookie-parser');
+import express from 'express';
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import { writeUserToTempDb, readUsersFromDb, validateNewUser } from '../db/temp_db_service.js';
+
 const app = express();
 
 app.use(express.json());
@@ -24,13 +26,27 @@ app.listen(PORT, () => {
     console.log(`Server is up and running on ${PORT} ...`);
 });
 
-app.post("/register", (req, res) => {
-    //TODO: validation against DB with hashed password
-    // make sure user name is not already taken
-    // if not, save username password to db
-    // 
+
+app.post("/register", async (req, res) => {
+
+    const { username, password } = req.body;
+
+    try {
+        const path = process.env.DB_PATH;
+        const userIsValidated = await validateNewUser(username, path);
+        if (userIsValidated) {
+            await writeUserToTempDb(username, password, path);
+        } else {
+            console.error('User validation failed');
+        }
+    } catch (error) {
+        console.error('Failed to read user data:', error);
+        res.status(500).send({ error: "Failed to process registration." });
+    }
+
+
     const payload = {
-        username: req.body.username,
+        username,
         iat: Math.floor(Date.now() / 1000),
         exp: Math.floor(Date.now() / 1000) + (60 * 60)
       };
