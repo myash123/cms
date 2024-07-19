@@ -9,7 +9,6 @@ const registerUserEndpoint = import.meta.env.VITE_REGISTER_URL;
 const verifyUserEndpoint = import.meta.env.VITE_VERIFY_USER_URL;
 
 const authService = () => {
-    
     const registerUser = async (userData: registerUserDataType) => {
         try {
             const response = await axios.post(registerUserEndpoint, userData);
@@ -19,15 +18,18 @@ const authService = () => {
         }
     }
 
-    const verifyUser = async (token: string) => {
+    const loginUser = async () => {
+        try {
+            
+        }
+    }
+
+    const verifyUser = async () => {
         try {
             const response = await axios.get(verifyUserEndpoint, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
                 withCredentials: true,
             });
-            console.log(response, token);
+            console.log(response);
         } catch (error) {
             console.error('Error verifying user', error);
         }

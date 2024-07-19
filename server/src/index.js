@@ -36,31 +36,26 @@ app.post("/register", (req, res) => {
       };
 
     const jwtSecretKey = process.env.JWT_SECRET_KEY;
-
     const token = jwt.sign(payload, jwtSecretKey);
-
-    res.send(token);
+    
+    res.cookie('jwtToken', token, {
+        httpOnly: true,
+        secure: true, 
+        sameSite: 'lax' 
+    });
+    res.status(200).send({ success: true, token });
 });
 
 app.get("/verify-user", (req, res) => {
-    const authHeader = req.headers['authorization']; 
-    console.log(authHeader);  
+    const token = req.cookies['jwtToken'];
 
-    if (authHeader && authHeader.startsWith('Bearer ')) {
-        const token = authHeader.substring(7); 
-        console.log(token); 
-
+    if (token) {
         const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
         try {
             const verified = jwt.verify(token, jwtSecretKey);
             if (verified) {
-                console.log('Cookies: ', req.cookies);
-                res.cookie('jwtToken', token, {
-                    httpOnly: true,
-                    secure: true, // ensure cookie is sent over HTTPS
-                    sameSite: 'lax' // strict or lax depending on your requirements
-                });
+                console.log('JWT verified successfully. User data:', verified);
                 return res.send("Successfully Verified");
             } else {
                 return res.status(401).send("Verification failed");
@@ -70,7 +65,7 @@ app.get("/verify-user", (req, res) => {
             return res.status(401).send(error.message);
         }
     } else {
-        console.log("No Authorization header found");
+        console.log("No JWT found in cookies");
         return res.status(401).send("JWT must be provided");
     }
 });
