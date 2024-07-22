@@ -27,7 +27,7 @@ const EditContactForm:React.FC<EditContactFormProps> = ({
             <form className="cms-form">
                 <label>Full name</label>
                 <input type="text" defaultValue={contact.fullName} onChange={handleChangeFullName} />
-                <label>Phone number (numbers only)</label>
+                <label>Phone number</label>
                 <input type="text" defaultValue={contact.phoneNumber}onChange={handleChangePhoneNumber} />
                 <label>Email</label>
                 <input type="text" defaultValue={contact.email} onChange={handleChangeEmail} />

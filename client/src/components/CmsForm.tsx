@@ -22,7 +22,7 @@ const CmsForm:React.FC<CmsFormProps> = ({
             <form onSubmit={handleSubmit} className="cms-form">
                 <label>Full name</label>
                 <input type="text" onChange={handleChangeFullName} />
-                <label>Phone number (numbers only)</label>
+                <label>Phone number</label>
                 <input type="text" onChange={handleChangePhoneNumber} />
                 <label>Email</label>
                 <input type="text" onChange={handleChangeEmail} />

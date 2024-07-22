@@ -10,8 +10,8 @@ const LogInForm:React.FC = () => {
 
     return (
 
-        <div>
-            <h2>Login, Please</h2>
+        <div className="login-form-container">
+            <h2>Login</h2>
             <form className="login-form">
                 <label>Username</label>
                 <input type="text" value={username} onChange={e => setUsername(e.target.value)} />

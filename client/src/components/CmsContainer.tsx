@@ -16,7 +16,7 @@ const CmsContainer = () => {
     
     return (
         <div className='cms-container'>
-            <h1> Your Contact Management System</h1>
+            <h1>Contacts</h1>
             <CmsForm
                 handleChangeFullName={handleChangeFullName}
                 handleChangePhoneNumber={handleChangePhoneNumber}
