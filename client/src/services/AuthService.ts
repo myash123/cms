@@ -19,23 +19,28 @@ const authService = () => {
         }
     }
 
-    const loginUser = async (userData: registerUserDataType) => {
+    const loginUser = async (userData: registerUserDataType): Promise<boolean> => {
+        console.log(userData);
         try {
             await axios.post(loginUserEndpoint, userData);
             console.log('Successfully logged in user', userData.username);
+            return true;
         } catch (error) {
             console.error('Error logging user in', error);
+            return false;
         }
     }
 
-    const verifyUser = async () => {
+    const verifyUser = async (): Promise<Boolean> => {
         try {
             const response = await axios.get(verifyUserEndpoint, {
                 withCredentials: true,
             });
             console.log(response);
+            return response.status === 200;
         } catch (error) {
             console.error('Error verifying user', error);
+            return false;
         }
     }
 
