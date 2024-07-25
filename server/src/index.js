@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { writeUserToTempDb, readUsersFromDb, validateNewUser } from '../db/temp_db_service.js';
+import { writeUserToTempDb, readDataFromDb, validateNewUser } from '../db/temp_db_service.js';
 
 const app = express();
 
@@ -67,7 +67,7 @@ app.post("/login-user", async (req, res) => {
     const path = process.env.DB_PATH;
 
     const { username, password } = req.body;
-    const usersList = await readUsersFromDb(path);
+    const usersList = await readDataFromDb(path);
     const userMatchExists = usersList.some(user => user.username === username && user.password === password);
 
     if (userMatchExists) {
@@ -91,9 +91,17 @@ app.post("/login-user", async (req, res) => {
     };
 });
 
+app.get("get-contacts/:username", async (req, res) => {
+    const path = process.env.CONTACTS_DB_PATH;
+    const { username } = req.params;
+    const contacts = await readDataFromDb(path);
+    console.log(username, contacts);
+})
+
+
 app.get("/verify-user", (req, res) => {
     const token = req.cookies['jwtToken'];
-
+    console.log('token', token);
     if (token) {
         const jwtSecretKey = process.env.JWT_SECRET_KEY;
 

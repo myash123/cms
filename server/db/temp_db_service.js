@@ -11,10 +11,10 @@ export const writeUserToTempDb = async (username, password, path) => {
     }
 }
 
-export const readUsersFromDb = async (path) => {
+export const readDataFromDb = async (path) => {
     try {
-        const users = await fs.readJSON(path);
-        return users;
+        const data = await fs.readJSON(path);
+        return data;
     } catch (error) {
         console.error(error);
     }
@@ -22,7 +22,7 @@ export const readUsersFromDb = async (path) => {
 
 export const validateNewUser = async (username, path) => {
     console.log('validating...');
-    const userList = await readUsersFromDb(path);
+    const userList = await readDataFromDb(path);
     let repeatedUser;
     if (username !== '') {
         console.log('The current user list is ', userList);
@@ -32,10 +32,10 @@ export const validateNewUser = async (username, path) => {
             return ( item['username'] == username )
         });
     }
-
     if (repeatedUser.length === 0) {
         return true;
     } else {
         return false;
     }
 }
+

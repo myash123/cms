@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import authService from "../services/AuthService";
+import ContactsService from "../services/ContactsService";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -22,6 +23,9 @@ const LogInForm:React.FC = () => {
         console.log(successful);
         if(successful) {
             navigate('/cms');
+            const response = await ContactsService().getContacts(username);
+            console.log(response);
+            
         } else {
             alert('Login unsuccessful');
         }

@@ -2,11 +2,11 @@ import '../App.css'
 import React from 'react';
 
 interface CmsFormProps {
-    handleChangeFullName: (e: any) => void,
-    handleChangePhoneNumber: (e: any) => void,
-    handleChangeAddress: (e: any) => void,
-    handleChangeEmail: (e: any) => void,
-    handleSubmit: (e: any) => void,
+    handleChangeFullName: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    handleChangePhoneNumber: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    handleChangeAddress: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    handleChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void,
 };
 
 const CmsForm:React.FC<CmsFormProps> = ({
